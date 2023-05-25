@@ -1,34 +1,33 @@
-# Normalización 
+# Normalization
 
-# Introducción
-Este repositorio contiene informacion sobre normalización de diagramas relacionales.
+# Introduction
+This repository contains information on relational diagram normalization.
 
-# Actividad 
-Convertir un modelo ER en un modelo relacional.
-+ Gererar Codigo DDL asociado.
-+  Verificar la Tercera forma normal.
-+ Verificar la forma normal de Boyce-Codd.
+# Activity
+Convert an ER model to a relational model.
++ Generate associated DE Code.
++ Verify Third Normal Form.
++ Verify Boyce-Codd normal form.
 
-## Respuesta
-El siguiente modelo esta basado  en las entidades, Persona, Profesor, Alumno, Curso y Matricula.
+## Answer
+The following model is based on the entities, Person, Teacher, Student, Course and Enrollment.
 
-# Diagrama de normalización.
-
+# Normalization diagram.
 ![Modelo ER](images/ER_normalizacion.jpg)
 
+## Description
+The entities in the model are the following:
 
-## Descripcion
-Las entidades en el modelo son las siguientes:
++ Person: Represents a person with attributes such as ID_Person (unique identifier), Name, Surname and Date_Birth.
++ Student: Represents a student with attributes such as Student_ID (unique identifier), Person_ID (foreign key for the Person table), and Grade.
++ Teacher: Represents a teacher with attributes such as ID_Professor (unique identifier), ID_Person (foreign key for the Person table) and Department.
++ Course: Represents a course with attributes such as Course_ID (unique identifier), Course_Name and Description.
++ Enrollment: Represents a student's enrollment in a course, with attributes such as ID_Matricula (unique identifier), ID_Student (foreign key for the Student table), ID_Curso (foreign key for the Course table) and Year.
 
-+ Persona: Representa a una persona con atributos como ID_Persona (identificador único), Nombre, Apellido y Fecha_Nacimiento.
-+ Alumno: Representa a un alumno con atributos como ID_Alumno (identificador único), ID_Persona (clave foránea para la tabla Persona) y Grado.
-+ Profesor: Representa a un profesor con atributos como ID_Profesor (identificador único), ID_Persona (clave foránea para la tabla Persona) y Departamento.
-+ Curso: Representa a un curso con atributos como ID_Curso (identificador único), Nombre_Curso y Descripcion.
-+ Matricula: Representa una matrícula de un alumno en un curso, con atributos como ID_Matricula (identificador único), ID_Alumno (clave foránea para la tabla Alumno), ID_Curso (clave foránea para la tabla Curso) y Año.
+**1FN (First Normal Form)**
 
-**1FN (Primera Forma Normal)**
+  ### Table Person.
 
- ### Tabla Persona.
 
 | ID_Persona | Nombre | Apellido | Fecha_Nacimiento |
 |------------|--------|----------|------------------|
@@ -37,14 +36,14 @@ Las entidades en el modelo son las siguientes:
 | 3          | Maria  | Garcia   | 1978-08-24       |
 | 4          | Luis   | Rodriguez| 1980-07-12       |
 
- ### Tabla Alumno.
+### Student Table.
  
  | ID_Alumno | ID_Persona | Grado |
 |-----------|------------|-------|
 | 1         | 1          | 10    |
 | 2         | 2          | 9     |
 
-### Tabla Matricula
+### Enrollment Table
 
 | ID_Matricula | ID_Alumno | ID_Curso | Año |
 |--------------|-----------|----------|-----|
@@ -53,33 +52,33 @@ Las entidades en el modelo son las siguientes:
 | 3            | 2         | 1        | 2023|
 
 
-### Tabla Profesor
+### Teacher Table
 
 | ID_Profesor | ID_Persona | Departamento |
 |-------------|------------|--------------|
 | 1           | 3          | Matemáticas  |
 | 2           | 4          | Literatura   |
 
-### Tabla Curso 
+
+### Course Table
+
 | ID_Curso | Nombre_Curso | Descripcion |
 |----------|--------------|-------------|
 | 1        | Matemáticas  | Curso de matemáticas avanzadas |
 | 2        | Literatura   | Curso de literatura contemporánea |
 
 
++ First Normal Form (1NF):
+Tables are 1NF compliant as all data is arranged in tables and each cell contains a single atomic value. In addition, primary keys are identified in each table to guarantee the uniqueness of the records.
 
-+ Primera Forma Normal (1NF):
-Las tablas cumplen con la 1NF ya que todos los datos están organizados en tablas y cada celda contiene un solo valor atómico. Además, se identifican claves primarias en cada tabla para garantizar la unicidad de los registros.
++ Second Normal Form (2NF):
+The tables comply with the 2NF since there is no partial dependency on any of them. The attributes in each table are completely dependent on the respective primary keys. For example, in the Enrollment table, all the attributes depend directly on the composite primary key (ID_Matricula, ID_Alumno, ID_Curso).
 
-+ Segunda Forma Normal (2NF):
-Las tablas cumplen con la 2NF ya que no existe dependencia parcial en ninguna de ellas. Los atributos en cada tabla dependen completamente de las claves primarias respectivas. Por ejemplo, en la tabla Matricula, todos los atributos dependen directamente de la clave primaria compuesta (ID_Matricula, ID_Alumno, ID_Curso).
-
-+ Tercera Forma Normal (3NF):
-Las tablas también cumplen con la 3NF ya que no existen dependencias transitivas entre los atributos. Cada atributo depende directamente de la clave primaria correspondiente. Por ejemplo, en la tabla Alumno, el atributo Grado depende directamente de la clave primaria ID_Alumno.
++ Third Normal Form (3NF):
+Tables are also 3NF compliant since there are no transitive dependencies between attributes. Each attribute depends directly on the corresponding primary key. For example, in the Student table, the Grade attribute depends directly on the Student_ID primary key.
 
 + Boyce-Codd Normal Form (BCNF):
-Según la estructura de las tablas, también cumplen con la forma normal de Boyce-Codd (BCNF). Esto significa que no hay dependencias funcionales no triviales en las tablas que no estén determinadas por las claves primarias. Cada atributo no clave depende completamente de las claves primarias correspondientes.
+Depending on the structure of the tables, they also conform to Boyce-Codd Normal Form (BCNF). This means that there are no non-trivial functional dependencies on tables that are not determined by primary keys. Each non-key attribute is completely dependent on the corresponding primary keys.
 
->No existen dependencias parciales ni transitivas en los datos. 
- El modelo de datos ya cumple con todas estas formas normales.
-
+>There are no partial or transitive dependencies in the data.
+  The data model already complies with all these normal forms.
